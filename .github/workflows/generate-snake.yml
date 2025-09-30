@@ -1,0 +1,23 @@
+    # Example content for generate-snake.yml (adjust as needed based on the specific action)
+    name: Generate GitHub Contribution Snake
+
+    on:
+      schedule:
+        - cron: "0 0 * * *" # Runs daily at midnight UTC
+      workflow_dispatch: # Allows manual triggering
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v2
+          - name: Generate Snake
+            uses: Platane/snk@v3
+            with:
+              github_user_name: 43v3rn88b # Replace with your username
+              outputs: |
+                dist/github-contribution-grid-snake.svg
+                dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
